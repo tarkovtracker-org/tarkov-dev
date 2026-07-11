@@ -21,7 +21,7 @@ export const fetchTarkovTrackerProgress = createAsyncThunk(
             "tarkovtracker.io": /^[a-zA-Z0-9]{22}$/,
             "tarkovtracker.org": /^(?:PVP_|PVE_).+$/i,
         };
-        if (!validators[domain] || !apiKey.match(validators[domain])) {
+        if (!Object.hasOwn(validators, domain) || !apiKey.match(validators[domain])) {
             return false;
         }
 
@@ -257,9 +257,9 @@ const settingsSlice = createSlice({
             state.tarkovTrackerDomain = action.payload;
             localStorageWriteJson("tarkovTrackerDomain", action.payload);
             state.regular.tarkovTrackerAPIKey = "";
-            localStorageWriteJson("regularSettings", state[state.regular]);
+            localStorageWriteJson("regularSettings", state.regular);
             state.pve.tarkovTrackerAPIKey = "";
-            localStorageWriteJson("pveSettings", state[state.pve]);
+            localStorageWriteJson("pveSettings", state.pve);
         },
         setDataLoading: (state, action) => {
             const loading = state.loadingData.split(",").filter(Boolean);

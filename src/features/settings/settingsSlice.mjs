@@ -25,7 +25,11 @@ export const fetchTarkovTrackerProgress = createAsyncThunk(
             return false;
         }
 
-        const response = await fetch(`https://${domain}/api/v2/progress`, {
+        const apiUrl =
+            domain === "tarkovtracker.org"
+                ? "https://api.tarkovtracker.org/progress"
+                : `https://${domain}/api/v2/progress`;
+        const response = await fetch(apiUrl, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${apiKey}`,

@@ -21,7 +21,7 @@ export const fetchTarkovTrackerProgress = createAsyncThunk(
             "tarkovtracker.io": /^[a-zA-Z0-9]{22}$/,
             "tarkovtracker.org": /^(?:PVP_|PVE_).+$/i,
         };
-        if (!apiKey.match(validators[domain])) {
+        if (!validators[domain] || !apiKey.match(validators[domain])) {
             return false;
         }
 

@@ -12,7 +12,8 @@ export default defineConfig({
     },
     source: {
         define: {
-            "process.env.RSTEST": process.env.RSTEST,
+            "process.env.PUBLIC_URL": JSON.stringify(process.env.PUBLIC_URL ?? ""),
+            "process.env.RSTEST": JSON.stringify(process.env.RSTEST),
             "__COMMIT_HASH__": JSON.stringify(commitHash),
         },
     },
